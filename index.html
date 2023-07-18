@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>The E-Statistica</title>
+    <meta name="description" content />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/popCSV.css" />
+    <link rel="stylesheet" href="css/popManual.css" />
+    <link rel="stylesheet" href="css/statistics.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <nav class="navbar"></nav>
+
+    <div class="quote-container">
+      <p class="quote">
+        "Be able to analyze statistics, which can be used to support or undercut
+        almost any argument." — Marilyn Vos Savant
+      </p>
+    </div>
+    <div class="button-container-1">
+      <section class="button-section">
+        <div class="button-container">
+          <a
+            href="#"
+            class="button"
+            data-tooltip="Insert CSV file from your local repository."
+            id="csvButton"
+            >Insert CSV</a
+          >
+        </div>
+        <div class="button-container">
+          <a
+            href="#"
+            class="button"
+            data-tooltip="Insert Manual Data in our built-in table."
+            id="manualDataButton"
+            >Manual Data</a
+          >
+        </div>
+      </section>
+    </div>
+
+    <!-- Modal -->
+    <div id="manualDataModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Enter Column Names</h2>
+        <textarea
+          id="inputData"
+          rows="4"
+          placeholder="Enter comma-separated data"
+        ></textarea>
+        <button id="addDataButton">Add Column Names</button>
+        <ul id="dataList"></ul>
+        <button id="processDataButton">Continue</button>
+      </div>
+    </div>
+
+    <h2 class="slideshow-header">Column Graphs</h2>
+    <div id="slideshow" class="slideshow"></div>
+    <div class="slideshow-controls">
+      <button id="prevButton" class="control-button" onclick="prevChart()">
+        &#8249;
+      </button>
+
+      <button id="nextButton" class="control-button" onclick="nextChart()">
+        &#8250;
+      </button>
+    </div>
+    <h2 class="button-container-2-header">What do you want to do?</h2>
+    <div class="button-container-2">
+      <section class="button-section">
+        <div class="button-container">
+          <a
+            href="#"
+            class="button"
+            data-tooltip="Compute statistics such as ANOVA, T-test, Pearson, Spearman, and Chi-Square."
+            id="statisticsButton"
+            >Statistics</a
+          >
+        </div>
+        <div class="button-container">
+          <a
+            href="#"
+            class="button"
+            data-tooltip="Predict value using Linear Regression, Random Forest, KNN, and Time-Series."
+            id="predictionButton"
+            >Prediction</a
+          >
+        </div>
+        <div class="button-container">
+          <a
+            href="#"
+            class="button"
+            data-tooltip="Have a calculator for basic tasks such as mean, median, mode, range, variance, minimum, maximum, and standard deviation."
+            id="calculatorButton"
+            >Calculator</a
+          >
+        </div>
+      </section>
+    </div>
+
+    <!-- Modal for Statistics -->
+    <div id="statisticsModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Choose a Statistical Test</h2>
+        <div class="button-container">
+          <button class="modal-button" id="anovaButton">ANOVA</button>
+        </div>
+        <div class="button-container">
+          <button class="modal-button" id="tTestButton">T-Test</button>
+        </div>
+        <div class="button-container">
+          <button class="modal-button" id="pearsonButton">Pearson</button>
+        </div>
+        <div class="button-container">
+          <button class="modal-button" id="spearmanButton">Spearman</button>
+        </div>
+        <div class="button-container">
+          <button class="modal-button" id="chiSquareButton">Chi-Square</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Prediction -->
+    <div id="predictionModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Choose a Prediction Algorithm</h2>
+        <div class="button-container">
+          <button class="modal-button" id="linearRegressionButton">
+            Linear Regression
+          </button>
+        </div>
+        <div class="button-container">
+          <button class="modal-button" id="randomForestButton">
+            Random Forest
+          </button>
+        </div>
+        <div class="button-container">
+          <button class="modal-button" id="knnButton">KNN</button>
+        </div>
+        <div class="button-container">
+          <button class="modal-button" id="timeSeriesButton">
+            Time Series
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Calculator -->
+    <div id="calculatorModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Choose a Calculation</h2>
+        <div class="button-container">
+          <button class="modal-button" id="meanButton">Mean</button>
+        </div>
+        <div class="button-container">
+          <button class="modal-button" id="medianButton">Median</button>
+        </div>
+        <div class="button-container">
+          <button class="modal-button" id="modeButton">Mode</button>
+        </div>
+        <div class="button-container">
+          <button class="modal-button" id="rangeButton">Range</button>
+        </div>
+        <div class="button-container">
+          <button class="modal-button" id="varianceButton">Variance</button>
+        </div>
+        <div class="button-container">
+          <button class="modal-button" id="minButton">Minimum</button>
+        </div>
+        <div class="button-container">
+          <button class="modal-button" id="maxButton">Maximum</button>
+        </div>
+        <div class="button-container">
+          <button class="modal-button" id="stdDeviationButton">
+            Standard Deviation
+          </button>
+        </div>
+        <div class="button-container">
+          <button class="modal-button" id="countButton">Count</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for ANOVA -->
+    <div id="anovaModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeANOVAButton">&times;</span>
+        <h2>Select Columns for ANOVA</h2>
+        <form id="anovaForm">
+          <!-- where all anova columns will go -->
+        </form>
+        <button id="processANOVAButton">Continue</button>
+        <div id="anovaResult"></div>
+      </div>
+    </div>
+
+
+    <!-- Modal for T-test -->
+    <div id="tTestModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeTTestButton">&times;</span>
+        <h2>Select Columns for T-Test</h2>
+        <form id="tTestForm">
+          <!-- Checkbox options for T-test -->
+          <!-- You can use the same 'createColumnCheckboxes' function or create a separate one for T-test -->
+        </form>
+        <button id="processTTestButton">Continue</button>
+        <div id="tTestResult"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer class="footer-container"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-statistics@6.1.0/dist/simple-statistics.min.js"></script>
+    
+
+    <!-- import all data first, then graph. JS is sequential -->
+    <script src="js/nav.js" async defer></script>
+    <script src="js/footer.js" async defer></script>
+
+    <script src="js/index.js" async defer></script>
+    <!-- show the charts first -->
+    <script src="js/3buttons.js" async defer></script>
+    <!-- need to identify the functions first before data -->
+    <script src="js/popCSV.js" async defer></script>
+    <script src="js/popManual.js" async defer></script>
+    <script src="js/columnChecker.js"></script>
+
+    <script src="js/chartslideshow.js"></script>
+    <script src="js/columnChecker.js"></script>
+
+    <script src="js/calculator.js"></script>
+  </body>
+</html>

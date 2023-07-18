@@ -1,0 +1,22 @@
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  transition: background-color 0.3s; /* Add this line */
+}
+
+.footer-content {
+  font-family: "Jost", sans-serif;
+  text-align: left;
+  margin-left: 40px;
+}
+
+footer:hover {
+  background-color: #2478BC;
+}

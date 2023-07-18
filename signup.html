@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/login.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <img src="assets/loader.gif" class="loader" alt="" />
+    <div class="alert-box">
+      <img src="assets/error.png" class="alert-img" />
+      <p class="alert-msg">Error Message</p>
+    </div>
+
+    <div class="container">
+      <img src="assets/bg.png" class="logo" alt="" />
+      <div>
+        <input type="text" autocomplete="off" id="name" placeholder="Name" />
+        <input type="email" autocomplete="off" id="email" placeholder="Email" />
+        <input
+          type="password"
+          autocomplete="off"
+          id="password"
+          placeholder="Password"
+        />
+        <input
+          type="text"
+          autocomplete="off"
+          id="number"
+          placeholder="Number"
+        />
+        <input type="checkbox" class="checkbox" id="terms-and-cond" />
+        <label for="terms-and-cond"
+          ><a>Agree to company terms and agreements.</a></label
+        >
+        <br />
+        <input type="checkbox" class="checkbox" id="notifications" />
+        <label for="notifications"><a>Receive emails and offers</a></label>
+        <br />
+        <button class="submit-btn">create account</button>
+      </div>
+
+      <!-- change to /login later on if with npm -->
+      <a href="login.html" class="link"
+        >Already have an account? Log in <span>here!</span></a
+      >
+    </div>
+    <script src="js/token.js"></script>
+    <script src="js/form.js"></script>
+  </body>
+</html>
