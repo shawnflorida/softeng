@@ -211,8 +211,6 @@
         <div id="anovaResult"></div>
       </div>
     </div>
-
-
     <!-- Modal for T-test -->
     <div id="tTestModal" class="modal">
       <div class="modal-content">
@@ -226,6 +224,42 @@
         <div id="tTestResult"></div>
       </div>
     </div>
+    <!-- Modal for Pearson -->
+    <div id="pearsonModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closePearsonButton">&times;</span>
+        <h2>Select Columns for Pearson</h2>
+        <form id="pearsonForm">
+        </form>
+        <button id="processPearsonButton">Continue</button>
+        <div id="pearsonResult"></div>
+      </div>
+    </div>
+    <!-- Modal for Spearman -->
+    <div id="spearmanModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeSpearmanButton">&times;</span>
+        <h2>Select Columns for Spearman</h2>
+        <form id="spearmanForm">
+        </form>
+        <button id="processSpearmanButton">Continue</button>
+        <div id="spearmanResult"></div>
+      </div>
+    </div>
+     <!-- Modal for Chi Square -->
+     <div id="chiModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeChiButton">&times;</span>
+        <h2>Select Columns for Chi-Square </h2>
+        <form id="chiForm">
+        </form>
+        <button id="processChiButton">Continue</button>
+        <div id="chiResult"></div>
+      </div>
+    </div>
+
+
+
 
 
 
@@ -280,6 +314,6 @@
     <script src="js/chartslideshow.js"></script>
     <script src="js/columnChecker.js"></script>
 
-    <script src="js/calculator.js"></script>
+    <script src="js/statistics.js"></script>
   </body>
 </html>

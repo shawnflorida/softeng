@@ -71,7 +71,7 @@ function renderCSVData(csvData) {
 
   // Store the column names in the global array
   columnNamesArray = columnNames;
-  console.log(columnNamesArray)
+  console.log(columnNamesArray);
 
   // Create a chart for each column
   for (var column in columnNames) {
@@ -86,12 +86,13 @@ function renderCSVData(csvData) {
   showButtonContainer2();
   showSlideshowHeader();
 
-  // Start the slideshow
   setInterval(updateSlideshow, 7000);
 
   callANOVA();
   callTtest();
-
+  callPearson();
+  callSpearman();
+  callChi();
 }
 
 function callANOVA() {
@@ -101,8 +102,7 @@ function callANOVA() {
     modal.style.display = "block";
 
     // Use the global 'columnNamesArray' to create the checkboxes
-    createColumnCheckboxes(columnNamesArray,"anovaForm","anovaColumn");
-
+    createColumnCheckboxes(columnNamesArray, "anovaForm", "anovaColumn");
   });
 
   document
@@ -117,7 +117,7 @@ function callANOVA() {
         }
       }
 
-      console.log(selectedColumns.length)
+      console.log(selectedColumns.length);
 
       // Check if at least 3 columns are selected for ANOVA
       if (selectedColumns.length < 3) {
@@ -144,22 +144,17 @@ function callANOVA() {
     });
 }
 
-
 function callTtest() {
-  // Event listener to open the ANOVA modal when the ANOVA button is clicked
   document.getElementById("tTestButton").addEventListener("click", function () {
     var modal = document.getElementById("tTestModal");
     modal.style.display = "block";
 
-    // Use the global 'columnNamesArray' to create the checkboxes
-    createColumnCheckboxes(columnNamesArray,"tTestForm","tTestColumn");
-
+    createColumnCheckboxes(columnNamesArray, "tTestForm", "tTestColumn");
   });
 
   document
     .getElementById("processTTestButton")
     .addEventListener("click", function () {
-      // Get the selected column names from the checkboxes
       var selectedColumns = [];
       var checkboxes = document.getElementsByName("tTestColumn");
       for (var i = 0; i < checkboxes.length; i++) {
@@ -168,30 +163,159 @@ function callTtest() {
         }
       }
 
-      console.log(selectedColumns.length)
+      console.log(selectedColumns.length);
 
-      // Check if at least 3 columns are selected for ANOVA
       if (selectedColumns.length > 2) {
         var resultDiv = document.getElementById("tTestResult");
-        resultDiv.innerHTML =
-          "Error: T-Test requires two columns only.";
+        resultDiv.innerHTML = "Error: T-Test requires two columns only.";
         return;
       }
-      console.log(selectedColumns[0],selectedColumns[1])
+      console.log(selectedColumns[0], selectedColumns[1]);
 
-      // Compute T-Test with the selected column names
-      var tTestResult = computeTTest(selectedColumns[0],selectedColumns[1]);
+      var tTestResult = computeTTest(selectedColumns[0], selectedColumns[1]);
 
-      // Display the ANOVA result in a div
       var resultDiv = document.getElementById("tTestResult");
       resultDiv.innerHTML = tTestResult;
     });
 
-  // Close the ANOVA modal when the "Close" button is clicked
   document
     .getElementById("closeTTestButton")
     .addEventListener("click", function () {
       var modal = document.getElementById("tTestModal");
+      modal.style.display = "none";
+    });
+}
+
+function callPearson() {
+  document
+    .getElementById("pearsonButton")
+    .addEventListener("click", function () {
+      var modal = document.getElementById("pearsonModal");
+      modal.style.display = "block";
+
+      createColumnCheckboxes(columnNamesArray, "pearsonForm", "pearsonColumn");
+    });
+
+  document
+    .getElementById("processPearsonButton")
+    .addEventListener("click", function () {
+      var selectedColumns = [];
+      var checkboxes = document.getElementsByName("pearsonColumn");
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          selectedColumns.push(checkboxes[i].value);
+        }
+      }
+
+      console.log(selectedColumns.length);
+
+      if (selectedColumns.length > 2) {
+        var resultDiv = document.getElementById("pearsonResult");
+        resultDiv.innerHTML = "Error: Pearson requires two columns only.";
+        return;
+      }
+      console.log(selectedColumns[0], selectedColumns[1]);
+
+      var pearsonResult = computePearson(
+        selectedColumns[0],
+        selectedColumns[1]
+      );
+
+      var resultDiv = document.getElementById("pearsonResult");
+      resultDiv.innerHTML = pearsonResult;
+    });
+
+  document
+    .getElementById("closePearsonButton")
+    .addEventListener("click", function () {
+      var modal = document.getElementById("pearsonModal");
+      modal.style.display = "none";
+    });
+}
+
+function callSpearman() {
+  document
+    .getElementById("spearmanButton")
+    .addEventListener("click", function () {
+      var modal = document.getElementById("spearmanModal");
+      modal.style.display = "block";
+
+      createColumnCheckboxes(
+        columnNamesArray,
+        "spearmanForm",
+        "spearmanColumn"
+      );
+    });
+
+  document
+    .getElementById("processSpearmanButton")
+    .addEventListener("click", function () {
+      var selectedColumns = [];
+      var checkboxes = document.getElementsByName("spearmanColumn");
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          selectedColumns.push(checkboxes[i].value);
+        }
+      }
+
+      console.log(selectedColumns.length);
+
+      if (selectedColumns.length > 2) {
+        var resultDiv = document.getElementById("spearmanResult");
+        resultDiv.innerHTML = "Error: Spearman requires two columns only.";
+        return;
+      }
+      console.log(selectedColumns[0], selectedColumns[1]);
+
+      var spearmanResult = computeSpearmanRho(
+        selectedColumns[0],
+        selectedColumns[1]
+      );
+
+      var resultDiv = document.getElementById("spearmanResult");
+      resultDiv.innerHTML = spearmanResult;
+    });
+
+  document
+    .getElementById("closeSpearmanButton")
+    .addEventListener("click", function () {
+      var modal = document.getElementById("spearmanModal");
+      modal.style.display = "none";
+    });
+}
+
+function callChi() {
+  document.getElementById("chiSquareButton").addEventListener("click", function () {
+    var modal = document.getElementById("chiModal");
+    modal.style.display = "block";
+
+    createColumnCheckboxes(columnNamesArray, "chiForm", "chiColumn");
+  });
+
+  document
+    .getElementById("processChiButton")
+    .addEventListener("click", function () {
+      var selectedColumns = [];
+      var checkboxes = document.getElementsByName("chiColumn");
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          selectedColumns.push(checkboxes[i].value);
+        }
+      }
+
+      console.log(selectedColumns.length);
+
+      var chiResult = computeChiSquare(
+        selectedColumns);
+
+      var resultDiv = document.getElementById("chiResult");
+      resultDiv.innerHTML = chiResult;
+    });
+
+  document
+    .getElementById("closeChiButton")
+    .addEventListener("click", function () {
+      var modal = document.getElementById("chiModal");
       modal.style.display = "none";
     });
 }
