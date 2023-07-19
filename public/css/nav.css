@@ -1,0 +1,95 @@
+nav {
+  background: #333;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  font-family: "Jost", sans-serif;
+  font-weight: bold;
+  text-decoration: burlywood;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  transition: background-color 0.3s;
+}
+
+nav:hover {
+  background-color: #2478bc;
+}
+
+.logo {
+  width: 300px;
+  height: 100px;
+  background: url("../assets/bg.png") no-repeat center;
+  background-size: contain;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+ul {
+  margin: 0;
+  padding: 40;
+  display: flex;
+  align-items: center;
+}
+
+li {
+  margin-left: 20px;
+}
+
+a:hover {
+  color: #333;
+}
+
+a.logo:hover {
+  background-color: transparent;
+}
+
+a.logo {
+  width: 300px;
+  height: 100px;
+  background: url("../assets/bg.png") no-repeat center;
+  background-size: contain;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+ul {
+  margin: 0;
+  padding: 40;
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+
+li {
+  margin-left: 30px;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+  position: relative;
+}
+
+a:hover::before {
+  opacity: 1;
+  visibility: visible;
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 5px 6px;
+  border-radius: 5px;
+  font-size: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+  opacity: 1;
+  visibility: visible;
+}
